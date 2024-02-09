@@ -12,6 +12,8 @@ export class UsersService {
   }
 
   async getDocument(query, selectedData) {
+    console.log('query', query);
+
     return await this.userModel.findOne(query).select(selectedData);
   }
 }

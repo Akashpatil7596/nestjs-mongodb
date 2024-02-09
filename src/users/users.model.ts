@@ -10,12 +10,12 @@ const UserSchema = new Schema({
 });
 
 interface Users {
-  firstName: String;
-  lastName: String;
-  email: String;
-  password: String;
-  profilePicture: String;
-  age: Number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  profilePicture: string;
+  age: number;
 }
 
 export { UserSchema, Users };
