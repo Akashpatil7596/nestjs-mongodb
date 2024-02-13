@@ -7,12 +7,16 @@ import { MailModule } from './mail/mail.module';
 import { AuthModule } from './auth/auth.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { CacheModule } from '@nestjs/cache-manager';
 
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost:27017/nestjs-demo'),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', '/public'),
+    }),
+    CacheModule.register({
+      isGlobal: true,
     }),
     UsersModule,
     MailModule,
