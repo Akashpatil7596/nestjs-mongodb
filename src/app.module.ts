@@ -12,7 +12,7 @@ import { join } from 'path';
   imports: [
     MongooseModule.forRoot('mongodb://localhost:27017/nestjs-demo'),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public'), // Path to your static files
+      rootPath: join(__dirname, '..', '..', '/public'),
     }),
     UsersModule,
     MailModule,

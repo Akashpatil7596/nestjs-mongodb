@@ -56,6 +56,17 @@ export class UsersController {
     }
   }
 
+  @Get('list')
+  async userList() {
+    try {
+      console.log('Okay');
+
+      return await this.userService.findAll();
+    } catch (error) {
+      return error;
+    }
+  }
+
   @Get(':id')
   async getUserDetail(@Param('id') id: string, @Query() query: any) {
     try {
