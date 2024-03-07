@@ -5,6 +5,7 @@ import { writeFileSync } from 'fs';
 import { UsersService } from './users.service';
 import { UserResources } from './users.resources';
 import { hash } from 'bcrypt';
+import { CacheInterceptor } from '@nestjs/cache-manager';
 
 @Controller('users')
 export class UsersController {
@@ -57,6 +58,7 @@ export class UsersController {
   }
 
   @Get('list')
+  // @UseInterceptors(CacheInterceptor)
   async userList() {
     try {
       console.log('Okay');

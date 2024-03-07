@@ -11,6 +11,7 @@ export class UsersService {
   constructor(
     @InjectModel('Users') private userModel: Model<Users>,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    @InjectModel('movies') private movieModel: Model<any>,
   ) {}
 
   async store(reqBody) {
@@ -28,9 +29,14 @@ export class UsersService {
       return cacheValue;
     }
 
-    const { data } = await axios.get('https://dummyjson.com/products');
+    // const { data } = await axios.get('https://dummyjson.com/products');
 
-    await this.cacheManager.set('my_test_key', data);
-    return data;
+    // await this.cacheManager.set('my_test_key', data);
+
+    const movies = await this.movieModel.find({ title: { $regex: 'Ace' } });
+
+    console.log('movies', movies);
+
+    return movies;
   }
 }

@@ -7,22 +7,33 @@ import { MailModule } from './mail/mail.module';
 import { AuthModule } from './auth/auth.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
-import { CacheModule } from '@nestjs/cache-manager';
+import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { redisStore } from 'cache-manager-redis-yet';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/nestjs-demo'),
+    MongooseModule.forRoot('mongodb+srv://root:root@cluster-demo.gf2e23g.mongodb.net/sample_mflix?retryWrites=true&w=majority&appName=Cluster-Demo'),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', '/public'),
     }),
     CacheModule.register({
       isGlobal: true,
+      ttl: 30000,
+      store: redisStore,
+      host: 'localhost',
+      port: 6379,
     }),
     UsersModule,
     MailModule,
     AuthModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    // {
+    //   provide: APP_INTERCEPTOR,
+    //   useClass: CacheInterceptor,
+    // },
+  ],
 })
 export class AppModule {}
